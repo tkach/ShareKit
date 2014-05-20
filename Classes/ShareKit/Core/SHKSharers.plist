@@ -14,6 +14,7 @@
 	</array>
 	<key>services</key>
 	<array>
+		<string>SHKOneNote</string>
 		<string>SHKKippt</string>
 		<string>SHKReadability</string>
 		<string>SHKEvernote</string>
@@ -39,6 +40,7 @@
 		<string>SHKDropbox</string>
 		<string>SHKYouTube</string>
 		<string>SHKFlickr</string>
+		<string>SHKImgur</string>
 	</array>
 </dict>
 </plist>

@@ -13,12 +13,15 @@
 [submodule "Submodules/Pocket-ObjC-SDK"]
 	path = Submodules/Pocket-ObjC-SDK
 	url = git://github.com/Pocket/Pocket-ObjC-SDK.git
-[submodule "Submodules/sstoolkit"]
-	path = Submodules/sstoolkit
-	url = https://github.com/soffes/sstoolkit.git
 [submodule "Submodules/google-toolbox-for-mac"]
 	path = Submodules/google-toolbox-for-mac
 	url = https://github.com/adinardi/google-toolbox-for-mac.git
 [submodule "Submodules/OpenInChrome"]
 	path = Submodules/OpenInChrome
 	url = https://github.com/GoogleChrome/OpenInChrome.git
+[submodule "Submodules/PKMultipartInputStream"]
+	path = Submodules/PKMultipartInputStream
+	url = https://github.com/pyke369/PKMultipartInputStream.git
+[submodule "Submodules/samtextview"]
+	path = Submodules/samtextview
+	url = https://github.com/soffes/SAMTextView.git

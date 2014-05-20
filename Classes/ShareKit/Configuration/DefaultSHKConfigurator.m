@@ -30,18 +30,22 @@
 
 @implementation DefaultSHKConfigurator
 
+#pragma mark - App Description
+
 /* 
  App Description 
  ---------------
  These values are used by any service that shows 'shared from XYZ'
  */
 - (NSString*)appName {
-	return @"My App Name";
+	return [[NSBundle mainBundle] infoDictionary][@"CFBundleDisplayName"];
 }
 
 - (NSString*)appURL {
 	return @"http://example.com";
 }
+
+#pragma mark - API Keys
 
 /*
  API Keys
@@ -60,6 +64,10 @@
  leaving that decision up to the user.
  */
 
+// OneNote - https://account.live.com/developers/applications
+- (NSString*)onenoteClientId {
+    return @"";
+}
 // Vkontakte
 // SHKVkontakteAppID is the Application ID provided by Vkontakte
 - (NSString*)vkontakteAppId {
@@ -385,6 +393,30 @@ on the auth path. It will try to use native auth if availible.
     return [NSNumber numberWithBool:YES];
 }
 
+// Imgur
+/*
+ 1. Set up an app at https://api.imgur.com/oauth2/addclient
+ 2. 'Callback URL' should match whatever you enter in SHKImgurCallbackURL.  The callback url doesn't have to be an actual existing url.  The user will never get to it because ShareKit intercepts it before the user is redirected.  It just needs to match.
+ */
+
+- (NSString *)imgurClientID {
+    return @"";
+}
+
+- (NSString *)imgurClientSecret {
+    return @"";
+}
+
+- (NSString *)imgurCallbackURL {
+    return @"";
+}
+
+///This removes user authorization. It allows image to be uploaded anonymously, without being tied to an account. More info is here: http://www.cimgf.com/2013/03/18/anonymous-image-file-upload-in-ios-with-imgur/
+- (NSNumber *)imgurAnonymousUploads {
+    return @NO;
+}
+#pragma mark - Basic UI Configuration
+
 /*
  UI Configuration : Basic
  ------------------------
@@ -443,19 +475,21 @@ on the auth path. It will try to use native auth if availible.
 	return [NSNumber numberWithBool:true];// Setting this to true will show More... button in SHKActionSheet, setting to false will leave the button out.
 }
 
+#pragma mark - Favorite Sharers
+
 /*
  Favorite Sharers
  ----------------
  These values are used to define the default favorite sharers appearing on ShareKit's action sheet.
  */
 - (NSArray*)defaultFavoriteURLSharers {
-    return [NSArray arrayWithObjects:@"SHKTwitter",@"SHKFacebook", @"SHKPocket", nil];
+    return [NSArray arrayWithObjects:@"SHKTwitter",@"SHKiOSTwitter", @"SHKFacebook", @"SHKiOSFacebook", @"SHKPocket", nil];
 }
 - (NSArray*)defaultFavoriteImageSharers {
-    return [NSArray arrayWithObjects:@"SHKMail",@"SHKFacebook", @"SHKCopy", nil];
+    return [NSArray arrayWithObjects:@"SHKMail",@"SHKFacebook", @"SHKiOSFacebook", @"SHKCopy", nil];
 }
 - (NSArray*)defaultFavoriteTextSharers {
-    return [NSArray arrayWithObjects:@"SHKMail",@"SHKTwitter",@"SHKFacebook", nil];
+    return [NSArray arrayWithObjects:@"SHKMail",@"SHKTwitter", @"SHKiOSTwitter", @"SHKFacebook", @"SHKiOSFacebook", nil];
 }
 
 //ShareKit will remember last used sharers for each particular mime type.
@@ -481,6 +515,8 @@ on the auth path. It will try to use native auth if availible.
 - (NSNumber*)autoOrderFavoriteSharers {
     return [NSNumber numberWithBool:true];
 }
+
+#pragma mark - Advanced UI Configuration
 
 /*
  UI Configuration : Advanced
@@ -514,10 +550,12 @@ on the auth path. It will try to use native auth if availible.
     return NSClassFromString(@"SHKActivityIndicator");
 }
 
+#pragma mark - Advanced Configuration
+
 /*
  Advanced Configuration
  ----------------------
- These settings can be left as is.  This only need to be changed for uber custom installs.
+ These settings can be left as is.  This only needs to be changed for uber custom installs.
  */
 
 - (NSNumber*)maxFavCount {
@@ -539,6 +577,8 @@ on the auth path. It will try to use native auth if availible.
 - (NSNumber*)allowAutoShare {
 	return [NSNumber numberWithBool:true];
 }
+
+#pragma mark - Debugging Settings
 
 /* 
  Debugging settings
